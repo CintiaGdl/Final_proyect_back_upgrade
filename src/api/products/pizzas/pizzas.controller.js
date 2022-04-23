@@ -24,8 +24,7 @@ const getOne = async (req, res, next) => {
 const postOne = async (req, res, next) => {
   try {
     const pizza = new Pizza(req.body);
-
-    // if (req.file) pizza.img = req.file.path;
+    if (req.file) pizza.img = req.file.path;
     const pizzaDB = await pizza.save();
     console.log(pizzaDB);
     return res.status(201).json(pizzaDB);
