@@ -9,6 +9,10 @@ const userSchema = new mongoose.Schema({
   password: { type: String, trim: true, required: true },
   email: { type: String, trim: true, required: true },
   direction: { type: String, trim: true, required: false },
+  orders: [{ type: mongoose.Schema.Types.ObjectId, ref: 'orders' ,required: true }],
+  favBeverages: [{ type: mongoose.Schema.Types.ObjectId, ref: 'beverages', required: true }],
+  favDesserts: [{ type: mongoose.Schema.Types.ObjectId, ref: 'desserts', required: true }],
+  favPizzas: [{ type: mongoose.Schema.Types.ObjectId, ref: 'pizzas', required: true }],
 });
 
 userSchema.pre("save", function (next) {

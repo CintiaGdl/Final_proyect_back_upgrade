@@ -8,7 +8,12 @@ const validationEmail = (email) => {
     return response.test(String(email).toLocaleLowerCase());
 }
 
+const validationId = (id, user) => {
+    return user._id === id ? true : false;
+}
+
 module.exports = {
     validationPassword,
-    validationEmail
+    validationEmail,
+    validationId
 }
