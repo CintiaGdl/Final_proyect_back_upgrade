@@ -45,15 +45,16 @@ const logout = (req, res, next) => {
   }
 };
 
-const getUser = async ( req, res, next) => {
+const getUser = async (req, res, next) => {
   try {
-    const { id } = req.params;
-    const user = await User.findById(id);
-    if (validationId(req.headers.user, user)) {
-      return next(setError(404, 'This action is not allowed.'))
-    }
+      const { id } = req.params;
+      const user = await User.findById(id);
+      if (validationId(req.headers.user, user)) {
+          return next(setError(404, 'This action is not allowed.'))
+      }
+      res.status(200).json(user);
   } catch (error) {
-    return next(setError(404, 'Cannot get user'))
+      return next(setError(404, 'Cannot get user'))
   }
 }
 
