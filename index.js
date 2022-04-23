@@ -6,7 +6,7 @@ const { configCloudinary } = require('./src/utils/cloudinary/config');
 const beverageRoutes = require("./src/api/products/beverages/beverages.routes");
 const dessertRoutes = require("./src/api/products/desserts/desserts.routes");
 const pizzasRoutes = require("./src/api/products/pizzas/pizzas.routes");
-const orderRoutes = require('./src/api/Orders/orders.routes');
+const orderRoutes = require("./src/api/Orders/orders.routes");
 
 const UserRoutes = require("./src/api/users/users.routes");
 

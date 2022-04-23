@@ -1,7 +1,5 @@
 const orderRoutes = require('express').Router();
-const {isAuth} = require('../../../middlewares/auth.middleware');
-const upload = require('../../../middlewares/updatefile.middleware');
-
+const {isAuth} = require('../../middlewares/auth.middleware');
 const { getAll, getOne, postOne, patchOne, deleteOne} = require('./orders.controller');
 
 orderRoutes.get('/', [isAuth],getAll);
