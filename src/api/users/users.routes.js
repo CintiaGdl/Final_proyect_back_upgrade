@@ -14,8 +14,8 @@ UserRoutes.post("/login", login);
 UserRoutes.post("/logout", [isAuth], logout);
 UserRoutes.get("/:id", [isAuth], getUser);
 UserRoutes.get("/", [isAuth], getAllUsers);
-UserRoutes.patch("/favProducts", [isAuth], addFavBeverage);
-UserRoutes.patch("/favProducts", [isAuth], addFavDessert);
-UserRoutes.patch("/favProducts", [isAuth], addFavPizza);
+UserRoutes.patch("/favProducts/:id", [isAuth], addFavBeverage);
+UserRoutes.patch("/favProducts/:id", [isAuth], addFavDessert);
+UserRoutes.patch("/favProducts/:id", [isAuth], addFavPizza);
 
 module.exports = UserRoutes;

@@ -12,6 +12,6 @@ const dessertSchema = new mongoose.Schema(
     }
 )
 
-const Dessert = mongoose.model('dessert', dessertSchema);
+const Dessert = mongoose.model('desserts', dessertSchema);
 
 module.exports = Dessert;

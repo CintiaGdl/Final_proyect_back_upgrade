@@ -15,6 +15,6 @@ const pizzaSchema = new mongoose.Schema(
     }
 )
 
-const Pizza = mongoose.model('pizza', pizzaSchema);
+const Pizza = mongoose.model('pizzas', pizzaSchema);
 
 module.exports = Pizza;

@@ -21,7 +21,7 @@ const getOne = async (req, res, next) => {
     }
 }
 
-const postOne = async (req, res, next) => {
+const postOne2 = async (req, res, next) => {
     try {
         const beverage = new Beverage(req.body);
         if (req.file) beverage.img = req.file.path;
@@ -29,6 +29,17 @@ const postOne = async (req, res, next) => {
         return res.status(201).json(beverageDB);
     } catch (error) {
         return next(setError(400, 'Cannot post beverage'));
+    }
+}
+
+const postOne = async (req, res, next) => {
+    try {
+        const beverage = new Beverage(req.body);
+        if (req.file) beverage.img = req.file.path;
+        const beverageDB = await beverage.save();
+        return res.status(201).json(beverageDB);
+    } catch (error) {
+        return next(setError(404, 'It was not possible to create a new book.'))
     }
 }
 
