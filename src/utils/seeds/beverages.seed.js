@@ -91,6 +91,6 @@ mongoose.connect(URIDB, { useNewUrlParser: true, useUnifiedTopology: true }).the
         console.log('TODO BORRADO')
     }
 }).catch((err) => console.error('HAY UN ERROR EN EL BORRADO')).then(async () => {
-    await Beverage.insertMany(songs);
+    await Beverage.insertMany(beverages);
     console.info('Creado')
 }).catch((err) => console.error('HAY UN ERROR EN EL CREADO')).finally(() => mongoose.disconnect());

@@ -6,7 +6,7 @@ const pizzaSchema = new mongoose.Schema(
         varients: { type: Array, required: true, trim: true},
         price: { type: Object, required: true, trim: true},
         img: { type: String, required: true, trim: true},
-        allergic: { type: String, required: false, trim: true},
+        allergic: { type: Array, required: false, trim: true},
         ingredients: { type: Array, required: true, trim: true},
         category: { type: String, required: true, trim: true},
     },

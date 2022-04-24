@@ -12,10 +12,10 @@ const pizzas = [
         name: "Paul Castellano",
         varients: ["Pequeña", "Mediana", "Familiar"],
         price: { small: 7.65, medium: 9.50, familiar: 13.50 },
+        img: "https://res.cloudinary.com/ds78avdh8/image/upload/v1650814140/Products/paul-castellano_nmfvgz.jpg",
+        allergic: [ "Gluten" , "Lácteos"],
         ingredients: ["Tomate", "Mozzarella", "Orégano"],
         category: "Vegetal",
-        allergic: [ "Gluten" , "Lácteos"],
-        img: "https://res.cloudinary.com/ds78avdh8/image/upload/v1650814140/Products/paul-castellano_nmfvgz.jpg"
     },
     {
         name: "Baby Nelson",

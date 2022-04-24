@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const Dessert = require('../../api/products/desserts/desserts.model
+const Dessert = require('../../api/products/desserts/desserts.model');
 
 require('dotenv').config();
 
