@@ -5,7 +5,10 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "dev": "nodemon index.js"
+    "dev": "nodemon index.js",
+    "beverages-seed": "node src/utils/seeds/beverages.seed.js",
+    "desserts-seed": "node src/utils/seeds/desserts.seed.js",
+    "pizzas-seed": "node src/utils/seeds/pizzas.seed.js"
   },
   "keywords": [
     "Node",
