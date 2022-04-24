@@ -335,12 +335,12 @@ const pizzas = [
 ]
 
 mongoose.connect(URIDB, { useNewUrlParser: true, useUnifiedTopology: true }).then(async () => {
-    const allSongs = await Song.find();
-    if (allSongs.length) {
-        await Song.collection.drop();
+    const allPizzas = await Pizza.find();
+    if (allPizzas.length) {
+        await Pizza.collection.drop();
         console.log('TODO BORRADO')
     }
 }).catch((err) => console.error('HAY UN ERROR EN EL BORRADO')).then(async () => {
-    await Song.insertMany(songs);
+    await Pizza.insertMany(pizzas);
     console.info('Creado')
 }).catch((err) => console.error('HAY UN ERROR EN EL CREADO')).finally(() => mongoose.disconnect());
