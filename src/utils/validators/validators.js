@@ -12,6 +12,18 @@ const validationId = (id, user) => {
     return user._id === id ? true : false;
 }
 
+// const validationRole = (role, user) => {
+//     if  (user._role === "basic") {
+//         user._role = 'basic';
+//     }
+//     else if (user._role === 'store') {
+//         user._role = 'store';
+//     }
+//     else if (user._role === 'admin') {
+//         user._role = 'admin';
+//     }
+// }
+
 module.exports = {
     validationPassword,
     validationEmail,

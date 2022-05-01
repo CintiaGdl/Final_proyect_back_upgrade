@@ -1,11 +1,11 @@
 const orderRoutes = require('express').Router();
-const {isAuth} = require('../../middlewares/auth.middleware');
+const { isAdmin, isBasic, isStore } = require('../../middlewares/auth.middleware');
 const { getAll, getOne, postOne, patchOne, deleteOne} = require('./orders.controller');
 
-orderRoutes.get('/', [isAuth],getAll);
-orderRoutes.get('/:id', [isAuth],getOne);
-orderRoutes.post('/', [isAuth], postOne);
-orderRoutes.patch('/:id', [isAuth], patchOne);
-orderRoutes.delete('/:id', [isAuth], deleteOne);
+orderRoutes.get('/', [isStore], getAll);
+orderRoutes.get('/:id', [isStore], getOne);
+orderRoutes.post('/', [isStore], postOne);
+orderRoutes.patch('/:id', [isStore], patchOne);
+orderRoutes.delete('/:id', [isStore], deleteOne);
 
 module.exports = orderRoutes;

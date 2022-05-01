@@ -4,6 +4,7 @@ const { validationPassword, validationEmail } = require("../../utils/validators/
 const { setError } = require('../../utils/error/error');
 
 const userSchema = new mongoose.Schema({
+  role: { type: String, trim: true, required: true, default: 'basic', enum: [ 'basic', 'store', 'admin'] },
   name: { type: String, trim: true, required: true },
   surname: { type: String, trim: true, required: true },
   password: { type: String, trim: true, required: true },

@@ -1,5 +1,5 @@
 const UserRoutes = require("express").Router();
-const { isAuth } = require("../../middlewares/auth.middleware");
+const { isAdmin, isBasic, isStore } = require("../../middlewares/auth.middleware");
 const { register, 
     login, 
     logout, 
@@ -11,11 +11,11 @@ const { register,
 
 UserRoutes.post("/register", register);
 UserRoutes.post("/login", login);
-UserRoutes.post("/logout", [isAuth], logout);
-UserRoutes.get("/:id", [isAuth], getUser);
-UserRoutes.get("/", [isAuth], getAllUsers);
-UserRoutes.patch("/favBeverages/:id", [isAuth], addFavBeverage);
-UserRoutes.patch("/favDesserts/:id", [isAuth], addFavDessert);
-UserRoutes.patch("/favPizzas/:id", [isAuth], addFavPizza);
+UserRoutes.post("/logout", [isBasic], logout);
+UserRoutes.get("/:id", [isStore], getUser);
+UserRoutes.get("/", [isStore], getAllUsers);
+UserRoutes.patch("/favBeverages/:id", [isBasic], addFavBeverage);
+UserRoutes.patch("/favDesserts/:id", [isBasic], addFavDessert);
+UserRoutes.patch("/favPizzas/:id", [isBasic], addFavPizza);
 
 module.exports = UserRoutes;

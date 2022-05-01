@@ -1,5 +1,6 @@
 const pizzasRoutes = require("express").Router();
-const { isAuth } = require("../../../middlewares/auth.middleware");
+const { is } = require("express/lib/request");
+const { isAdmin, isBasic, isStore } = require("../../../middlewares/auth.middleware");
 const upload = require("../../../middlewares/updatefile.middleware");
 
 const {
@@ -12,8 +13,8 @@ const {
 
 pizzasRoutes.get("/", getAll);
 pizzasRoutes.get("/:id", getOne);
-pizzasRoutes.post("/", [isAuth], upload.single("img"), postOne);
-pizzasRoutes.patch("/:id", [isAuth], upload.single("img"), patchOne);
-pizzasRoutes.delete("/:id", [isAuth], deleteOne);
+pizzasRoutes.post("/", [isAdmin], upload.single("img"), postOne);
+pizzasRoutes.patch("/:id", [isAdmin], upload.single("img"), patchOne);
+pizzasRoutes.delete("/:id", [isAdmin], deleteOne);
 
 module.exports = pizzasRoutes;

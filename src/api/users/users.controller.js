@@ -26,7 +26,7 @@ const login = async (req, res, next) => {
       return next(setError(404, 'This email is not register.'));
     }
     if (bcrypt.compareSync(req.body.password, user.password)) {
-      const token = JwtUtils.generateToken(user._id, user.email);
+      const token = JwtUtils.generateToken(user._id, user.email, user.role);
       return res.status(200).json(token);
     } else {
         return next(setError(404, 'This password is not correct.'))
