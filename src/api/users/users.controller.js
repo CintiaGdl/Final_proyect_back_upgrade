@@ -2,8 +2,8 @@ const User = require("./users.model");
 const bcrypt = require("bcrypt");
 const JwtUtils = require("../../utils/jwt/jwt");
 const { setError } = require('../../utils/error/error');
-// const { set } = require("express/lib/application");
 const { validationId } = require('../../utils/validators/validators');
+
 
 const register = async (req, res, next) => {
   try {
@@ -103,6 +103,18 @@ const addFavPizza = async (req, res, next) => {
   }
 } 
 
+
+
+const deleteOneUser = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const user = await User.findByIdAndDelete(id);
+    return res.status(200).json(user);
+  } catch (error) {
+    return next(setError(400, "Cannot delete user"));
+  }
+};
+
 module.exports = { 
   register, 
   login, 
@@ -111,4 +123,6 @@ module.exports = {
   addFavBeverage, 
   addFavDessert, 
   addFavPizza, 
-  getAllUsers };
+  getAllUsers,
+  deleteOneUser
+ };

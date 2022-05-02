@@ -7,7 +7,9 @@ const { register,
     addFavBeverage, 
     addFavDessert, 
     addFavPizza, 
-    getAllUsers } = require("./users.controller");
+    getAllUsers,
+    deleteOneUser
+ } = require("./users.controller");
 
 UserRoutes.post("/register", register);
 UserRoutes.post("/login", login);
@@ -17,5 +19,6 @@ UserRoutes.get("/", [isStore], getAllUsers);
 UserRoutes.patch("/favBeverages/:id", [isBasic], addFavBeverage);
 UserRoutes.patch("/favDesserts/:id", [isBasic], addFavDessert);
 UserRoutes.patch("/favPizzas/:id", [isBasic], addFavPizza);
+UserRoutes.delete("/:id", [isAdmin], deleteOneUser);
 
 module.exports = UserRoutes;

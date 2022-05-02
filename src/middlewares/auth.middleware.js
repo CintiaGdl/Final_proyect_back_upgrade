@@ -56,12 +56,12 @@ const isStore = async (req, res, next) => {
         const validToken = JwtUtils.verifyToken(parsedToken, process.env.JWT_SECRET);
         const userLogued = await User.findById(validToken.id);
         req.user = userLogued;
-        if (userLogued.role === 'store') {
+        if (userLogued.role === 'store'|| userLogued.role === 'admin') {
             next();
         }
-        else if (userLogued.role === 'admin') {
+        /* else if (userLogued.role === 'admin') {
             next();
-        }
+        } */
         else {
             return next(setError(404, 'You are not authenticated for this action.'))
         }
