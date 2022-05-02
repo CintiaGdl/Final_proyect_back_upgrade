@@ -16,7 +16,7 @@ UserRoutes.post("/login", login);
 UserRoutes.post("/logout", [isBasic], logout);
 UserRoutes.get("/:id", [isBasic], getUser);
 UserRoutes.get("/", [isStore], getAllUsers);
-UserRoutes.patch("/:id", [isBasic], addFavBeverage);
+UserRoutes.patch("/favBeverages/:id", [isBasic], addFavBeverage);
 UserRoutes.patch("/favDesserts/:id", [isBasic], addFavDessert);
 UserRoutes.patch("/favPizzas/:id", [isBasic], addFavPizza);
 UserRoutes.delete("/:id", [isAdmin], deleteOneUser);
