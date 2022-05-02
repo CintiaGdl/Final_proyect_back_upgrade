@@ -47,12 +47,17 @@ const logout = (req, res, next) => {
 
 const getUser = async (req, res, next) => {
   try {
+    const token = req.headers.authorization;
+    const parsedToken = token.replace('Bearer ', '');
+    const validToken = JwtUtils.verifyToken(parsedToken, process.env.JWT_SECRET);
+    const user = await User.findById(validToken.id);
+    if (user.role === 'basic') {
+      return res.status(200).json(user);
+    } else if (user.role === 'store' || user.role === 'admin') {
       const { id } = req.params;
-      const user = await User.findById(id);
-      if (validationId(req.headers.user, user)) {
-          return next(setError(404, 'This action is not allowed.'))
+      const user2 = await User.findById(id);
+      return res.status(200).json(user2);
       }
-      res.status(200).json(user);
   } catch (error) {
       return next(setError(404, 'Cannot get user'))
   }

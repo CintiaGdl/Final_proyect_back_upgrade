@@ -14,7 +14,7 @@ const { register,
 UserRoutes.post("/register", register);
 UserRoutes.post("/login", login);
 UserRoutes.post("/logout", [isBasic], logout);
-UserRoutes.get("/:id", [isStore], getUser);
+UserRoutes.get("/:id", [isBasic], getUser);
 UserRoutes.get("/", [isStore], getAllUsers);
 UserRoutes.patch("/:id", [isBasic], addFavBeverage);
 UserRoutes.patch("/favDesserts/:id", [isBasic], addFavDessert);
