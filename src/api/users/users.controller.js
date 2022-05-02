@@ -73,8 +73,6 @@ const addFavBeverage = async (req, res, next) => {
     const parsedToken = token.replace('Bearer ', '');
     const validToken = JwtUtils.verifyToken(parsedToken, process.env.JWT_SECRET);
     const user = await User.findById(validToken.id);
-    // req.user = user;
-    // user = await User.findById(id);
     if (user.role === 'basic') {
       user.favBeverages = [...user.favBeverages, ...req.body.favBeverages];
       const updateUser = await User.findByIdAndUpdate(user._id, user);
@@ -93,11 +91,21 @@ const addFavBeverage = async (req, res, next) => {
 
 const addFavDessert = async (req, res, next) => {
   try {
-      const { id } = req.params;
-      const user = await User.findById(id);
+    const token = req.headers.authorization;
+    const parsedToken = token.replace('Bearer ', '');
+    const validToken = JwtUtils.verifyToken(parsedToken, process.env.JWT_SECRET);
+    const user = await User.findById(validToken.id);
+    if (user.role === 'basic') {
       user.favDesserts = [...user.favDesserts, ...req.body.favDesserts];
       const updateUser = await User.findByIdAndUpdate(user._id, user);
       return res.status(200).json(updateUser);
+    } else if (user.role === 'store' || user.role === 'admin') {
+      const { id } = req.params;
+      const user2 = await User.findById(id);
+      user2.favDesserts = [...user2.favDesserts, ...req.body.favDesserts];
+      const updateUser2 = await User.findByIdAndUpdate(user2._id, user2);
+      return res.status(200).json(updateUser2);
+      }
   } catch (error) {
       return next(setError(404, 'It was not possible add this dessert to favorite list.'));
   }
@@ -105,11 +113,21 @@ const addFavDessert = async (req, res, next) => {
 
 const addFavPizza = async (req, res, next) => {
   try {
-      const { id } = req.params;
-      const user = await User.findById(id);
+    const token = req.headers.authorization;
+    const parsedToken = token.replace('Bearer ', '');
+    const validToken = JwtUtils.verifyToken(parsedToken, process.env.JWT_SECRET);
+    const user = await User.findById(validToken.id);
+    if (user.role === 'basic') {
       user.favPizzas = [...user.favPizzas, ...req.body.favPizzas];
       const updateUser = await User.findByIdAndUpdate(user._id, user);
       return res.status(200).json(updateUser);
+    } else if (user.role === 'store' || user.role === 'admin') {
+      const { id } = req.params;
+      const user2 = await User.findById(id);
+      user2.favPizzas = [...user2.favPizzas, ...req.body.favPizzas];
+      const updateUser2 = await User.findByIdAndUpdate(user2._id, user2);
+      return res.status(200).json(updateUser2);
+      }
   } catch (error) {
       return next(setError(404, 'It was not possible add this pizza to favorite list.'));
   }
