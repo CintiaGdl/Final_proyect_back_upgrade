@@ -20,7 +20,7 @@ UserRoutes.get("/", [isStore], getAllUsers);
 UserRoutes.patch("/favBeverages/:id", [isBasic], addFavBeverage);
 UserRoutes.patch("/favDesserts/:id", [isBasic], addFavDessert);
 UserRoutes.patch("/favPizzas/:id", [isBasic], addFavPizza);
-UserRoutes.patch("/:id", patchOneUser);
+UserRoutes.patch("/:id", [isBasic], patchOneUser);
 UserRoutes.delete("/:id", [isAdmin], deleteOneUser);
 
 module.exports = UserRoutes;
