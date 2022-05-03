@@ -3,7 +3,8 @@ const { setError } = require('../../utils/error/error');
 
 const getAll = async (req, res, next) => {
     try {
-        const orders = await Order.find().populate('users');
+        // const orders = await Order.find().populate('users');
+        const orders = await Order.find()
         res.status(200).json(orders);
     } catch (error) {
         return next(setError(400, 'Cannot get orders.'));
@@ -13,7 +14,7 @@ const getAll = async (req, res, next) => {
 const getOne = async (req, res, next) => {
     try {
         const {id} = req.params;
-        const order = await Order.findById(id).populate('users');
+        const order = await Order.findById(id);
         res.status(200).json(order);
     } catch (error) {
         return next(setError(400, 'Cannot get order.'));

@@ -27,7 +27,8 @@ const login = async (req, res, next) => {
     }
     if (bcrypt.compareSync(req.body.password, user.password)) {
       const token = JwtUtils.generateToken(user._id, user.email, user.role);
-      return res.status(200).json(token);
+      let userData = { name: user.name, email: user.email, role: user.role, _id: user._id  }
+      return res.status(200).json({token, userData });
     } else {
         return next(setError(404, 'This password is not correct.'))
     }
