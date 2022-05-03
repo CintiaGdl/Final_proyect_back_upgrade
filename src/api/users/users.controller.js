@@ -138,12 +138,54 @@ const addFavPizza = async (req, res, next) => {
   }
 } 
 
+const patchOneUser = async (req, res, next) => {
+  try {
 
+    /* const token = req.headers.authorization;
+    const parsedToken = token.replace('Bearer ', '');
+    const validToken = JwtUtils.verifyToken(parsedToken, process.env.JWT_SECRET);
+    const user = await User.findById(validToken.id);
+    if (user.role === 'basic') {
+      const {name} = req.body;
+      const updateUser = await User.findByIdAndUpdate(user._id, user);
+      return res.status(200).json(updateUser);
+    } else if (user.role === 'store' || user.role === 'admin') {
+      const {name} = req.params;
+      const { id } = req.params;
+      const user2 = await User.findById(id);
+      const updateUser2 = await User.findByIdAndUpdate(user2._id, user2);
+      return res.status(200).json(updateUser2);
+      } */
+
+      const {id} = req.params;
+      const user = new User(req.body);
+      user.favBeverages = req.body.favBeverages;
+      user.favDesserts = req.body.favDesserts;
+      user.favPizzas = req.body.favPizzas;
+      user._id = id;
+      const updateUser = await User.findByIdAndUpdate(id, user);
+      return res.status(200).json(updateUser);
+
+  } catch (error) {
+      return next(setError(400, 'Cannot update user'));
+  }
+}
 
 const deleteOneUser = async (req, res, next) => {
   try {
     const { id } = req.params;
     const user = await User.findByIdAndDelete(id);
+    return res.status(200).json(user);
+  } catch (error) {
+    return next(setError(400, "Cannot delete user"));
+  }
+};
+
+const deleteFavPizzas = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const user = await User.findById(id);
+    user.favPizzas = user.favPizzas
     return res.status(200).json(user);
   } catch (error) {
     return next(setError(400, "Cannot delete user"));
@@ -159,5 +201,6 @@ module.exports = {
   addFavDessert, 
   addFavPizza, 
   getAllUsers,
-  deleteOneUser
+  deleteOneUser,
+  patchOneUser
  };

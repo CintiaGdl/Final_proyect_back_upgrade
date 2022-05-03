@@ -8,7 +8,8 @@ const { register,
     addFavDessert, 
     addFavPizza, 
     getAllUsers,
-    deleteOneUser
+    deleteOneUser,
+    patchOneUser
  } = require("./users.controller");
 
 UserRoutes.post("/register", register);
@@ -19,6 +20,7 @@ UserRoutes.get("/", [isStore], getAllUsers);
 UserRoutes.patch("/favBeverages/:id", [isBasic], addFavBeverage);
 UserRoutes.patch("/favDesserts/:id", [isBasic], addFavDessert);
 UserRoutes.patch("/favPizzas/:id", [isBasic], addFavPizza);
+UserRoutes.patch("/:id", patchOneUser);
 UserRoutes.delete("/:id", [isAdmin], deleteOneUser);
 
 module.exports = UserRoutes;
