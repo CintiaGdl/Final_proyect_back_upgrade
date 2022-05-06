@@ -34,6 +34,7 @@ const postOne2 = async (req, res, next) => {
 
 const postOne = async (req, res, next) => {
     try {
+        console.log(req)
         const beverage = new Beverage(req.body);
         if (req.file) beverage.img = req.file.path;
         const beverageDB = await beverage.save();

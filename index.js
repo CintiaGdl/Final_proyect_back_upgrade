@@ -8,6 +8,7 @@ const dessertRoutes = require("./src/api/products/desserts/desserts.routes");
 const pizzasRoutes = require("./src/api/products/pizzas/pizzas.routes");
 const orderRoutes = require("./src/api/Orders/orders.routes");
 const paymentRoutes = require("./src/api/Payment/payment.routes");
+const statusRoutes = require("./src/api/Status/status.routes");
 
 const UserRoutes = require("./src/api/users/users.routes");
 
@@ -48,6 +49,7 @@ app.use("/api/products/beverages", beverageRoutes);
 app.use("/api/products/desserts", dessertRoutes);
 app.use("/api/products/pizzas", pizzasRoutes);
 app.use("/api/orders/checkout", paymentRoutes);
+app.use("/api/status", statusRoutes);
 
 app.use("*", (req, res, next) => {
   const error = new Error();
