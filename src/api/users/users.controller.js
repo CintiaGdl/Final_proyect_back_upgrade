@@ -3,6 +3,7 @@ const bcrypt = require("bcrypt");
 const JwtUtils = require("../../utils/jwt/jwt");
 const { setError } = require('../../utils/error/error');
 const { validationId } = require('../../utils/validators/validators');
+const { deleteImgCloudinary } = require("../../middlewares/deletefile.middleware");
 
 
 const register = async (req, res, next) => {
@@ -27,7 +28,7 @@ const login = async (req, res, next) => {
     }
     if (bcrypt.compareSync(req.body.password, user.password)) {
       const token = JwtUtils.generateToken(user._id, user.email, user.role);
-      let userData = { name: user.name, email: user.email, role: user.role, _id: user._id  }
+      let userData = { name: user.name, email: user.email, role: user.role, _id: user._id, img: user.img  }
       return res.status(200).json({token, userData });
     } else {
         return next(setError(404, 'This password is not correct.'))
@@ -142,32 +143,13 @@ const addFavPizza = async (req, res, next) => {
 const patchOneUser = async (req, res, next) => {
   try {
 
-    const token = req.headers.authorization;
-    const parsedToken = token.replace('Bearer ', '');
-    const validToken = JwtUtils.verifyToken(parsedToken, process.env.JWT_SECRET);
-    const user = await User.findById(validToken.id);
-    if (user.role === 'basic') {
-      // const user = new User(req.body);
-      user.name = req.body.name;
-      user.surname = req.body.surname;
-      user.email = req.body.email;
-      user.favBeverages = req.body.favBeverages;
-      user.favDesserts = req.body.favDesserts;
-      user.favPizzas = req.body.favPizzas;
-      const updateUser = await User.findByIdAndUpdate(user._id, user);
-      return res.status(200).json(updateUser);
+    const {id} = req.params;
+        const user = new User(req.body);
+        if (req.file) user.img = req.file.path;
+        user._id = id;
+        const updateUser = await User.findByIdAndUpdate(id, user);
+        return res.status(200).json(updateUser);
 
-
-    } else if (user.role === 'store' || user.role === 'admin') {
-      const { id } = req.params;
-      const user = new User(req.body);
-      user.favBeverages = req.body.favBeverages;
-      user.favDesserts = req.body.favDesserts;
-      user.favPizzas = req.body.favPizzas;
-      user._id = id;
-      const updateUser = await User.findByIdAndUpdate(id, user);
-      return res.status(200).json(updateUser);
-      }
 
   } catch (error) {
       return next(setError(400, 'Cannot update user'));
@@ -178,6 +160,7 @@ const deleteOneUser = async (req, res, next) => {
   try {
     const { id } = req.params;
     const user = await User.findByIdAndDelete(id);
+    if (user.img) deleteImgCloudinary(user.img);
     return res.status(200).json(user);
   } catch (error) {
     return next(setError(400, "Cannot delete user"));

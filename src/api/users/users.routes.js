@@ -1,5 +1,7 @@
 const UserRoutes = require("express").Router();
 const { isAdmin, isBasic, isStore } = require("../../middlewares/auth.middleware");
+const upload = require("../../middlewares/updatefile.middleware");
+
 const { register, 
     login, 
     logout, 
@@ -20,7 +22,7 @@ UserRoutes.get("/", [isStore], getAllUsers);
 UserRoutes.patch("/favBeverages/:id", [isBasic], addFavBeverage);
 UserRoutes.patch("/favDesserts/:id", [isBasic], addFavDessert);
 UserRoutes.patch("/favPizzas/:id", [isBasic], addFavPizza);
-UserRoutes.patch("/:id", [isBasic], patchOneUser);
+UserRoutes.patch("/:id", [isBasic], upload.single("img"), patchOneUser);
 UserRoutes.delete("/:id", [isAdmin], deleteOneUser);
 
 module.exports = UserRoutes;
