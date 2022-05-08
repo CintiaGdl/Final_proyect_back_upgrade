@@ -6,6 +6,7 @@ const { setError } = require('../../utils/error/error');
 const userSchema = new mongoose.Schema({
   role: { type: String, trim: true, required: false, default: 'basic', enum: [ 'basic', 'store', 'admin'] },
   name: { type: String, trim: true, required: true },
+  img: { type: String, required: false, trim: true, default:'https://res.cloudinary.com/ds78avdh8/image/upload/v1651919973/Products/eqifvqjtaqjquq74u77l.png'},
   // surname: { type: String, trim: true, required: false },
   password: { type: String, trim: true, required: true },
   email: { type: String, trim: true, required: true },
